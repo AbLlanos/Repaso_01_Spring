@@ -6,10 +6,11 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
-public class cliente {
+public class Cliente {
 
     //id
     @Id
@@ -28,6 +29,7 @@ public class cliente {
     @NotBlank(message = "Celular es requerido")
     @Size(min = 10, max = 10, message = "Celular debe tener exactamente 10 dígitos")
     @Pattern(regexp = "^[0-9]{10}$", message = "Celular solo números, 10 dígitos")
+    @Column(unique = true)
     private String celular;
     //Decimal - value entre comillas
     @NotNull(message = "El peso es obligatorio")
@@ -43,7 +45,20 @@ public class cliente {
     @NotNull(message = "Decisión es obligatoria")
     private Boolean desicion;
 
+
     //Fecha - LocalDateTime
     private LocalDateTime fechaActivacion;
+
+    //Rol
+    @Size(min = 1, max = 20, message = "Debe seleccionar un rol")
+    private String rol;
+
+    //One to many
+    //usa mappedBy = "Poner el nombre de la otra tabla"
+    //cascade = cascade
+    //Usar List el tipo de dato y este nombre se usa al otro lado
+
+    @OneToMany(mappedBy = "clienteDatos", cascade = CascadeType.ALL)
+    private List<Notas> cliente_id;
 
 }

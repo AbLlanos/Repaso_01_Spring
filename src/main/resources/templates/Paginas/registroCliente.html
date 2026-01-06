@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro Cliente</title>
+</head>
+<body>
+
+<h1>Registro Cliente</h1>
+
+<!-- Mensaje de éxito -->
+<p th:if="${mensaje}" th:text="${mensaje}"></p>
+
+<form th:action="@{/Cliente/guardarCliente}" th:object="${cliente}" method="post">
+
+    <div>
+        <label>Cédula:</label>
+        <input type="text" th:field="*{cedula}">
+        <span th:if="${#fields.hasErrors('cedula')}"
+              th:errors="*{cedula}"></span>
+    </div>
+
+    <div>
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}">
+        <span th:if="${#fields.hasErrors('nombre')}"
+              th:errors="*{nombre}"></span>
+    </div>
+
+    <div>
+        <label>Celular:</label>
+        <input type="text" th:field="*{celular}">
+        <span th:if="${#fields.hasErrors('celular')}"
+              th:errors="*{celular}"></span>
+    </div>
+
+    <div>
+        <label>Peso:</label>
+        <input type="number" step="0.1" th:field="*{peso}">
+        <span th:if="${#fields.hasErrors('peso')}"
+              th:errors="*{peso}"></span>
+    </div>
+
+    <div>
+        <label>Altura:</label>
+        <input type="number" th:field="*{altura}">
+        <span th:if="${#fields.hasErrors('altura')}"
+              th:errors="*{altura}"></span>
+    </div>
+
+    <div>
+        <label>Decisión:</label>
+        <select th:field="*{desicion}">
+            <option th:value="">--Seleccione--</option>
+            <option th:value="true">Sí</option>
+            <option th:value="false">No</option>
+        </select>
+        <span th:if="${#fields.hasErrors('desicion')}"
+              th:errors="*{desicion}"></span>
+    </div>
+
+    <div>
+        <label>Rol:</label>
+        <input type="text" th:field="*{rol}">
+        <span th:if="${#fields.hasErrors('rol')}"
+              th:errors="*{rol}"></span>
+    </div>
+
+    <button type="submit">Guardar</button>
+</form>
+
+</body>
+</html>

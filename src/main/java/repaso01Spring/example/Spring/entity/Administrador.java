@@ -6,9 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
+import lombok.Data;
 
 @Entity
-public class administrador {
+@Data
+public class Administrador {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -21,7 +23,7 @@ public class administrador {
     @NotBlank(message = "Ingrese su peso")
     @DecimalMin( value = "5" , message = "peso minimo 5")
     @DecimalMax(value = "300", message = " peso maximo 300")
-    private Float pedoAdmin;
+    private Float pesoAdmin;
 
     @NotBlank(message = "Debe ingresar su altura")
     @Min( value = 5, message = "altura minima 5")
