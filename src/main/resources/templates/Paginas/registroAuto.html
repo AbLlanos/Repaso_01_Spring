@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Registro de autos</h1>
+
+<p th:if="${message}" th:text="${message}" ></p>
+
+<form th:action="@{/Auto/guardarAuto}" th:object="${auto}" method="post">
+
+  <input type="hidden" th:field="*{idAuto}">
+
+  <div>
+    <label>Ingrese el nombre</label>
+
+    <input type="text" th:field="*{nombreAuto}">
+
+    <span th:if="${#fields.hasErrors('nombreAuto')}" th:errors="*{nombreAuto}"></span>
+
+    nombreAuto
+    pesoAuto
+    kilometraje_auto
+    nuevo
+
+
+  </div>
+
+  <div>
+    <label>Peso del auto</label>
+    <input type="number" th:field="*{pesoAuto}">
+
+    <span th:if="${#fields.hasErrors('pesoAuto')}"
+    th:errors="*{pesoAuto}"></span>
+
+  </div>
+
+  <div>
+    <label>Ingrese el kilometraje</label>
+    <input type="number" th:field="*{kilometraje_auto}">
+
+    <span th:if="${#fields.hasErrors('kilometraje_auto')}" th:errors="*{kilometraje_auto}"></span>
+
+  </div>
+
+  <div>
+    <label>Es nuevo</label>
+    <select th:field="*{nuevo}">
+      <option th:value="true"> Si</option>
+      <option th:value="false">No</option>
+    </select>
+
+
+  </div>
+
+  <div>
+
+  </div>
+  <button type="submit">Subir auto</button>
+
+</form>
+
+</body>
+</html>

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import repaso01Spring.example.Spring.entity.Cliente;
 import repaso01Spring.example.Spring.services.ClienteService;
 
+import java.time.LocalDateTime;
+
 @Controller
 //Usar request mapping pero cambiar siempre le return ya que esto solo
 //hace que la ruta en el navegador siempre salgo con el sufijo /Cliente
@@ -26,6 +28,9 @@ public class ClienteController {
 
     @GetMapping("/registroCliente")
     public String irRegistro(Model model){
+        //Para poner datos directamente instanciar la clase
+        Cliente nuevoCliente = new Cliente();
+        nuevoCliente.setFechaActivacion(LocalDateTime.now());
         model.addAttribute("cliente", new Cliente());
         return "Paginas/registroCliente";
     }
@@ -44,10 +49,12 @@ public class ClienteController {
                                  BindingResult bindingResult,
                                  Model model){
         if (bindingResult.hasErrors()) {
+            cliente.setFechaActivacion(LocalDateTime.now());
             // vuelve al formulario mostrando los errores
             return "Paginas/registroCliente";
         }
 
+        cliente.setFechaActivacion(LocalDateTime.now());
         clienteService.guardarCliente(cliente);
         model.addAttribute("mensaje", "Cliente guardado correctamente");
         return "Paginas/registroCliente";

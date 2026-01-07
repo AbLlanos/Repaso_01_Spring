@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,6 +7,57 @@
 <body>
 
 <h1>Registro admin</h1>
+
+<!-- en caso de que venga directamnte th:if/text = "${}"-->
+<p th:if="${message}" th:text="${message}"></p>
+
+<!--1. Poner th:action y la ruta con arroba-->
+<!--2 Poner th:object con $-->
+<!--3 POner methos = post-->
+
+<form th:action="@{/Admin/guardarAdmin}" th:object="${admin}" method="post">
+
+    <div>
+
+        <!--Para tomar valores usar th:field = "*{campo}"-->
+        <input type="hidden" th:field="*{idAdmin}">
+    </div>
+
+    <div>
+        <!--Usar label, input type, th:field="*{campo}"-->
+        <label> Ingrese el nombre del admin</label>
+
+        <input type="text" th:field="*{nombreAdmin}">
+        <!--Para mostrar errores,
+        1. crear span
+        2. Usar th:if = "${#fields.hasErrors("nombreAdmin}")}"
+        3. USAR th:errors = "*(nombreAdmin)"-->
+
+        <span th:if="${#fields.hasErrors('nombreAdmin')}"
+                th:errors = "*{nombreAdmin}">
+
+        </span>
+
+    </div>
+
+
+    <div>
+
+        <label>Ingrese el peso del Admin</label>
+
+        <input type="number"
+        th:field="*{pesoAdmin}">
+
+        <span th:if="${#fields.hasErrors('pesoAdmin')}"
+        th:errors="*{pesoAdmin}"></span>
+
+    </div>
+
+    <button type="submit"> Guardar admin</button>
+
+</form>
+
+
 
 </body>
 </html>

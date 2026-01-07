@@ -13,9 +13,9 @@
 
 <form th:action="@{/Cliente/guardarCliente}" th:object="${cliente}" method="post">
 
+    <!-- Usar typeHidden -->
     <div>
-        <label>Id:</label>
-        <input type="text" th:field="*{id}">
+        <input type="hidden" th:field="*{id}">
     </div>
 
     <div>
@@ -66,7 +66,14 @@
 
     <div>
         <label>Rol:</label>
-        <input type="text" th:field="*{rol}">
+
+        <select th:field="*{rol}">
+            <option th:value="usuario" >Usuario</option>
+            <option th:value="admin" >Admin </option>
+
+        </select>
+
+
         <span th:if="${#fields.hasErrors('rol')}"
               th:errors="*{rol}"></span>
     </div>
