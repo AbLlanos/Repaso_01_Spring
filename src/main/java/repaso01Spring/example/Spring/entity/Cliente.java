@@ -45,6 +45,14 @@ public class Cliente {
     @NotNull(message = "Decisión es obligatoria")
     private Boolean desicion;
 
+    @NotNull(message = "Ingrese correo")
+    @Email(message = "Formato no valido")
+    private String correoElectronico;
+
+    @NotNull(message = "Ingresar contraseña")
+    @Size(min = 6,message = "contrasñea minimo de 6 letras")
+    private String password;
+
 
     //Fecha - LocalDateTime
     private LocalDateTime fechaActivacion;

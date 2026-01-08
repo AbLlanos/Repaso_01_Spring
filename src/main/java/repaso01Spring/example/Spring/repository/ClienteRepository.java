@@ -18,4 +18,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long > {
     //
     Optional<Cliente> findById (Long id);
 
+    // 5. Funcion para buscar correo en el autenticaion
+
+    Optional<Cliente> findByCorreoElectronico(String correo);
+
 }

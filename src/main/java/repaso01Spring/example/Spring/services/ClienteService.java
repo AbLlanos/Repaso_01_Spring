@@ -72,4 +72,10 @@ public class ClienteService {
 
     }
 
+    // 5. Funcion para buscar correo en el autenticaion
+
+
+    public Optional<Cliente> encontrarClienteCorreo(String correo) {
+        return clienteRepository.findByCorreoElectronico(correo);
+    }
 }
