@@ -30,8 +30,19 @@ public class ClienteService {
     //Poner el mismo tipo de variable
     //Llamar a la funcion desde el repositorio y enviar variable
 
-    public Optional<Cliente> buscarClienteporCedula(String cedula) {
-        return clienteRepository.findByCedula(cedula);
+    public List<Cliente> buscarClienteporCedula(String cedula) {
+
+        if (cedula == null || cedula.trim().isEmpty() ){
+
+            return clienteRepository.findAll();
+
+        } else {
+
+            return clienteRepository.findByCedula(cedula.trim());
+
+        }
+
+
     }
 
     //3. Eliminar
@@ -52,4 +63,13 @@ public class ClienteService {
     public List<Cliente> mostrarClientes() {
         return clienteRepository.findAll();
     }
+
+    //4 Editar
+
+    public Optional<Cliente> buscarPorId(Long id){
+
+        return clienteRepository.findById(id);
+
+    }
+
 }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Screen</title>
+</head>
+<body>
+
+<h1>Listado de clientes</h1>
+
+<!-- Form de búsqueda por cédula -->
+<form th:action="@{/Admin/adminPerfil}" method="get">
+  <input type="text" name="buscarCliente"
+         th:value="${buscarCliente}" placeholder="Buscar por cédula">
+  <button type="submit">Buscar</button>
+</form>
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Cédula</th>
+    <th>Nombre</th>
+    <th>Celular</th>
+    <th>Peso</th>
+    <th>Altura</th>
+    <th>Decisión</th>
+    <th>Rol</th>
+    <th>Editar</th>
+    <th>Eliminar</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- th:each recorre la lista clientes -->
+  <tr th:each="cli : ${clientes}">
+    <td th:text="${cli.id}"></td>
+    <td th:text="${cli.cedula}"></td>
+    <td th:text="${cli.nombre}"></td>
+    <td th:text="${cli.celular}"></td>
+    <td th:text="${cli.peso}"></td>
+    <td th:text="${cli.altura}"></td>
+    <td th:text="${cli.desicion}"></td>
+    <td th:text="${cli.rol}"></td>
+    <td>
+      <a th:href="@{/Admin/editarCliente/{id}(id=${cli.id})}" class="btn btn-warning">Editar</a>
+    </td>
+    <td>
+      <a th:href="@{/Admin/eliminarCliente/{id}(id=${cli.id})}" >Eliminar</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

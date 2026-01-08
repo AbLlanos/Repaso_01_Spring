@@ -52,7 +52,7 @@ public class AutoController {
 
         model.addAttribute("message","auto registrado");
 
-        return  "Paginas/registroAuto";
+        return  "/index";
 
     }
 
