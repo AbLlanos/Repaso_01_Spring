@@ -15,17 +15,18 @@ public class Notas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idNota;
 
-    @NotBlank (message = "Debe ir nota 1")
+    //Not null para decimales
+    @NotNull (message = "Debe ir nota 1")
     @DecimalMin( value = "0", message = "nota minima 0")
     @DecimalMax( value = "10", message = "nota maxima 10")
     private Float nota1;
 
-    @NotBlank (message = "Debe ir nota 2")
+    @NotNull (message = "Debe ir nota 2")
     @DecimalMin( value = "0", message = "nota minima 0")
     @DecimalMax( value = "10", message = "nota maxima 10")
     private Float nota2;
 
-    @NotBlank ( message = "Nota de comportamiento 1 - 10 ")
+    @NotNull ( message = "Nota de comportamiento 1 - 10 ")
     @Min(value = 0, message = "comporamientmeino minimo 1")
     @Max(value = 10, message = "Comporamtineto maximo 10")
     private Integer notaCom;

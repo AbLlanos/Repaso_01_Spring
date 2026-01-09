@@ -27,7 +27,7 @@ public class ConfiguracionSeguridad {
             http.authorizeHttpRequests( auth -> auth
                     //Despues de llamar a auth -> usar .requestMatcher,usar comas para aumentar y al final poner
                     // .permitAll para que todo puede verlo
-                    .requestMatchers("/","/login","/Cliente/registroCliente","/Cliente/guardarCliente","/postLogin").permitAll()
+                    .requestMatchers("/","/login","/Cliente/registroCliente","/Cliente/guardarCliente","/postLogin","/Cliente/guardarNota").permitAll()
 
                     .requestMatchers("/Admin/**").hasRole("ADMIN")
 

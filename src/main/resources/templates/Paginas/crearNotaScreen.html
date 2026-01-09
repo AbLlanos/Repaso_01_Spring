@@ -16,7 +16,7 @@
 
         <label> Ingrese nota 1</label>
 
-        <input th:field="*{nota1}">
+        <input type="number" th:field="*{nota1}">
 
         <span th:if="${#fields.hasErrors('nota1')}"
         th:errors="*{nota1}"></span>
@@ -27,7 +27,7 @@
 
         <label> Ingrese nota 1</label>
 
-        <input th:field="*{nota2}">
+        <input type="number" th:field="*{nota2}">
 
         <span th:if="${#fields.hasErrors('nota2')}"
               th:errors="*{nota2}"></span>
@@ -38,7 +38,7 @@
 
         <label> Ingrese nota 1</label>
 
-        <input th:field="*{notaCom}">
+        <input type="number" th:field="*{notaCom}">
 
         <span th:if="${#fields.hasErrors('notaCom')}"
               th:errors="*{notaCom}"></span>

@@ -104,6 +104,7 @@ public class ClienteController {
         Cliente usuario = obtenerDatosUsuario(authentication);
         Notas nuevaNota = new Notas();
 
+
         nuevaNota.setClienteDatos(usuario);
         nuevaNota.setFechaIngresoNota(LocalDateTime.now());
 
@@ -117,12 +118,17 @@ public class ClienteController {
     @PostMapping("/guardarNota")
     public String guardarNota(@Valid @ModelAttribute("nota") Notas notas,
                               BindingResult bindingResult,
-                              Model model){
+                              Authentication authentication){
 
         if (bindingResult.hasErrors()){
 
             return "Paginas/crearNotaScreen";
 
+        }
+
+        Cliente usuario = obtenerDatosUsuario(authentication);
+        if (!notas.getClienteDatos().getId().equals(usuario.getId())) {
+            return "redirect:/Cliente/misNotas";  // Seguridad
         }
 
         notasService.guardarNotas(notas);
