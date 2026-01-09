@@ -47,6 +47,28 @@
     </div>
 
     <div>
+
+        <label>Ingrese correo</label>
+        <input th:field="*{correoElectronico}">
+
+        <span th:if="${#fields.hasErrors('correoElectronico')}"
+            th:errors = "*{correoElectronico}"></span>
+
+
+    </div>
+
+    <div>
+
+        <label>Ingrese correo</label>
+        <input th:field="*{password}">
+
+        <span th:if="${#fields.hasErrors('password')}"
+              th:errors = "*{password}"></span>
+
+
+    </div>
+
+    <div>
         <label>Altura:</label>
         <input type="number" th:field="*{altura}">
         <span th:if="${#fields.hasErrors('altura')}"

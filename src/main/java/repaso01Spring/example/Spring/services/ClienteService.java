@@ -1,6 +1,8 @@
 package repaso01Spring.example.Spring.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import repaso01Spring.example.Spring.entity.Cliente;
 import repaso01Spring.example.Spring.repository.ClienteRepository;
@@ -16,12 +18,22 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    //6.Llamar passowrd enconder
+    @Autowired
+    public PasswordEncoder passwordEncoder;
+
     //1. Guardar
     // 1.Llamar cliente
     // 2. Usar repository
     // 3. Usar .save y guardar entidad
 
     public Cliente guardarCliente(Cliente cliente) {
+
+        //6.1 Encripatar contraseña
+        if (cliente.getPassword()!=null) {
+            cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
+        }
+
         return clienteRepository.save(cliente);
     }
 
@@ -78,4 +90,7 @@ public class ClienteService {
     public Optional<Cliente> encontrarClienteCorreo(String correo) {
         return clienteRepository.findByCorreoElectronico(correo);
     }
+
+
+
 }

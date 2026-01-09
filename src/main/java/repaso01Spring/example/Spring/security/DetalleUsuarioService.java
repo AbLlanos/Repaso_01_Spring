@@ -20,16 +20,26 @@ public class DetalleUsuarioService implements UserDetailsService
     @Autowired
     private ClienteRepository clienteRepository;
 
-    //4. Buscar en el id UserDetails
+    //4. Buscar en el ide UserDetails
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
+        //Intancias clase de donde provienen los ususarios
+        //Usar al final delk email .orElseThrow(()-> ner UserNameNotFoundException("Correro no encontrado))
         Cliente cliente = clienteRepository.findByCorreoElectronico(email).orElseThrow(()-> new UsernameNotFoundException("Correo no econtrado"));
 
+        //En return usar User.builder y a continuancion
+        //.username(clase.getCorroe)}
+        //.password(clase.getpassword))
+        //.roles
+        //.build
         return User.builder()
                 .username(cliente.getCorreoElectronico())
                 .password(cliente.getPassword())
-                .roles(cliente.getRol())
+                .roles(cliente.getRol().toUpperCase())
                 .build();
     }
+
+
+
 }

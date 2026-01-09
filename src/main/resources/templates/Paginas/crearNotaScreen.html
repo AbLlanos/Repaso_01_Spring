@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Crear nota</h1>
+
+<Form th:action="@{/Cliente/guardarNota}" th:object="${nota}" method="post">
+
+
+    <input type="hidden" th:field="*{idNota}">
+    <div>
+
+        <label> Ingrese nota 1</label>
+
+        <input th:field="*{nota1}">
+
+        <span th:if="${#fields.hasErrors('nota1')}"
+        th:errors="*{nota1}"></span>
+
+    </div>
+
+    <div>
+
+        <label> Ingrese nota 1</label>
+
+        <input th:field="*{nota2}">
+
+        <span th:if="${#fields.hasErrors('nota2')}"
+              th:errors="*{nota2}"></span>
+
+    </div>
+
+    <div>
+
+        <label> Ingrese nota 1</label>
+
+        <input th:field="*{notaCom}">
+
+        <span th:if="${#fields.hasErrors('notaCom')}"
+              th:errors="*{notaCom}"></span>
+
+    </div>
+
+    <button type="submit"> Crear nota</button>
+
+
+</Form>
+
+</body>
+</html>

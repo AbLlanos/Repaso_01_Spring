@@ -7,13 +7,13 @@
 <body>
 <h1>Inicio de sesion</h1>
 
-<form th:action="@{/irAdmin}" >
+<form th:action="@{/login}" method="post" >
 
     <Label>ingrese el correo electronico</Label>
-    <input>
+    <input name="username">
 
     <Label>ingrese la contraseña</Label>
-    <input>
+    <input name="password">
 
     <button type="submit">Iniciar sesion</button>
 

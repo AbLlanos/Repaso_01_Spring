@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Mis Notas</h1>
+<table border="1">
+  <tr>
+    <th>Nota1</th><th>Nota2</th><th>Comportamiento</th><th>Fecha</th><th>Acciones</th>
+  </tr>
+  <tr th:each="nota : ${notas}">
+    <td th:text="${nota.nota1}"></td>
+    <td th:text="${nota.nota2}"></td>
+    <td th:text="${nota.notaCom}"></td>
+    <td th:text="${nota.fechaIngresoNota}"></td>
+    <td>
+      <a th:href="@{/Cliente/editarNota/{id}(id=${nota.idNota})}">Editar</a>
+      <a th:href="@{/Cliente/eliminarNota/{id}(id=${nota.idNota})}">Eliminar</a>
+    </td>
+  </tr>
+</table>
+
+
+</body>
+</html>

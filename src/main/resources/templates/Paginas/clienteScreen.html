@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleag.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +9,10 @@
 
 <h1>Paginas clientes </h1>
 
+<h1>Bienvenido <span th:text="${usuario.nombre}"></span></h1>
 
+<a th:href="@{/Cliente/crearNota}">+ Nueva Nota</a> |
+<a th:href="@{/Cliente/misNotas}">Mis Notas</a>
 
 </body>
 </html>
