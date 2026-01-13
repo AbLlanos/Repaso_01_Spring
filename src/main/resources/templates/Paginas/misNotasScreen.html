@@ -7,21 +7,39 @@
 <body>
 
 <h1>Mis Notas</h1>
+
+<!-- DEBUG: mostrar si hay datos -->
+<p>Total notas: <span th:text="${notas?.size() ?: 0}"></span></p>
+
 <table border="1">
+  <thead>
   <tr>
-    <th>Nota1</th><th>Nota2</th><th>Comportamiento</th><th>Fecha</th><th>Acciones</th>
+    <th>ID</th>
+    <th>Nota 1</th>
+    <th>Nota 2</th>
+    <th>Comportamiento</th>
+    <th>Fecha</th>
+    <th>Acciones</th>
   </tr>
+  </thead>
+  <tbody>
   <tr th:each="nota : ${notas}">
+    <td th:text="${nota.idNota}"></td>
     <td th:text="${nota.nota1}"></td>
     <td th:text="${nota.nota2}"></td>
     <td th:text="${nota.notaCom}"></td>
     <td th:text="${nota.fechaIngresoNota}"></td>
     <td>
-      <a th:href="@{/Cliente/editarNota/{id}(id=${nota.idNota})}">Editar</a>
-      <a th:href="@{/Cliente/eliminarNota/{id}(id=${nota.idNota})}">Eliminar</a>
+      <a th:href="@{/Cliente/editarNota/{id}(id=${nota.idNota})}">Editar</a> |
+      <a th:href="@{/Cliente/eliminarNota/{id}(id=${nota.idNota})}"
+         onclick="return confirm('¿Eliminar?')">Eliminar</a>
     </td>
   </tr>
+  </tbody>
 </table>
+
+<a th:href="@{/Cliente/crearNota}">+ Nueva Nota</a>
+
 
 
 </body>

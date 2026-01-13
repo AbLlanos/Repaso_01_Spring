@@ -27,14 +27,21 @@ public class ConfiguracionSeguridad {
             http.authorizeHttpRequests( auth -> auth
                     //Despues de llamar a auth -> usar .requestMatcher,usar comas para aumentar y al final poner
                     // .permitAll para que todo puede verlo
-                    .requestMatchers("/","/login","/Cliente/registroCliente","/Cliente/guardarCliente","/postLogin","/Cliente/guardarNota").permitAll()
+                    .requestMatchers("/","/login","/Cliente/registroCliente","/Cliente/guardarCliente","/postLogin","/Cliente/guardarNota","/Cliente/actualizarNota").permitAll()
 
                     .requestMatchers("/Admin/**").hasRole("ADMIN")
 
                     .requestMatchers("/Cliente/**").hasRole("USUARIO")
 
+                            .anyRequest().authenticated()
 
-            )//Llamar a .formLogin para establecer una ruta base
+
+            )
+                    .csrf(csrf -> csrf
+                            .ignoringRequestMatchers("/Cliente/actualizarNota")  // Solo este POST
+                    )
+
+                    //Llamar a .formLogin para establecer una ruta base
                     //Crear variable form -> form
                     //Llamar loginPage(ruta)
                     //.permitAll

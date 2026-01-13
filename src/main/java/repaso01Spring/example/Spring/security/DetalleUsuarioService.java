@@ -36,7 +36,7 @@ public class DetalleUsuarioService implements UserDetailsService
         return User.builder()
                 .username(cliente.getCorreoElectronico())
                 .password(cliente.getPassword())
-                .roles(cliente.getRol().toUpperCase())
+                .roles("ROLE_" + cliente.getRol())
                 .build();
     }
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Nota</title>
+</head>
+<body>
+<h1>Editar nota</h1>
+
+
+<form th:action="@{/Cliente/actualizarNota(id=${nota.idNota})}"
+      th:object="${nota}" method="post">
+
+  <input type="hidden" th:field="*{idNota}">
+
+  <div>
+    <label>Nota 1:</label>
+    <input type="number" step="0.1" th:field="*{nota1}">
+    <span th:if="${#fields.hasErrors('nota1')}" th:errors="*{nota1}"></span>
+  </div>
+
+  <div>
+    <label>Nota 2:</label>
+    <input type="number" step="0.1" th:field="*{nota2}">
+    <span th:if="${#fields.hasErrors('nota2')}" th:errors="*{nota2}"></span>
+  </div>
+
+  <div>
+    <label>Comportamiento:</label>
+    <input type="number" th:field="*{notaCom}">
+    <span th:if="${#fields.hasErrors('notaCom')}" th:errors="*{notaCom}"></span>
+  </div>
+
+  <button type="submit">Actualizar</button>
+  <a th:href="@{/Cliente/misNotas}">Cancelar</a>
+</form>
+</body>
+</html>

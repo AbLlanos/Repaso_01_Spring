@@ -12,11 +12,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import repaso01Spring.example.Spring.entity.Cliente;
 import repaso01Spring.example.Spring.entity.Notas;
+import repaso01Spring.example.Spring.repository.NotasRepository;
 import repaso01Spring.example.Spring.services.ClienteService;
 import repaso01Spring.example.Spring.services.NotasService;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 //Usar request mapping pero cambiar siempre le return ya que esto solo
@@ -121,38 +125,80 @@ public class ClienteController {
                               Authentication authentication){
 
         if (bindingResult.hasErrors()){
-
             return "Paginas/crearNotaScreen";
-
         }
 
+        // Siempre asignar el usuario logueado aquí
         Cliente usuario = obtenerDatosUsuario(authentication);
-        if (!notas.getClienteDatos().getId().equals(usuario.getId())) {
-            return "redirect:/Cliente/misNotas";  // Seguridad
-        }
+        notas.setClienteDatos(usuario);
+        notas.setFechaIngresoNota(LocalDateTime.now());
 
         notasService.guardarNotas(notas);
 
         return "redirect:/Cliente/misNotas";
-
     }
+
 
     @GetMapping("/misNotas")
-    public String misNotas(Authentication authentication,
-                           Model model)
-    {
-
+    public String misNotas(Authentication authentication, Model model) {
         Cliente usuario = obtenerDatosUsuario(authentication);
 
-        List<Notas> misNotas = notasService.buscarNotasPorCliente(usuario.getId());
-        model.addAttribute("notas",misNotas);
+        // ✅ Simple: todas las notas → filtro por cliente
+        List<Notas> todasNotas = notasService.mostraTodasNotas();
+        List<Notas> misNotas = todasNotas.stream()
+                .filter(n -> n.getClienteDatos().getId().equals(usuario.getId()))
+                .collect(Collectors.toList());
 
+        model.addAttribute("notas", misNotas);
         return "Paginas/misNotasScreen";
-
-
     }
 
-    
+    @Autowired
+    private NotasRepository notasRepository;
+
+    @GetMapping("/editarNota/{id}")
+    public String editarNota(@PathVariable Long id, Model model){
+        // Busca nota directamente
+        Optional<Notas> notaOpt = notasService.buscarNotaPorID(id);
+
+        // Si existe, envía al form
+            model.addAttribute("nota", notaOpt.get());
+
+        // Si no, redirige
+        return "Paginas/editarNotasScreen";
+    }
+
+
+
+    @PostMapping("/actualizarNota")
+    public String actualizarNota(@RequestParam Long id,
+                                 @Valid @ModelAttribute("nota") Notas nota,
+                                 BindingResult bindingResult,
+                                 Authentication authentication){
+
+        if (bindingResult.hasErrors()) {
+            return "Paginas/editarNotasScreen";
+        }
+
+        Cliente usuario = obtenerDatosUsuario(authentication);
+        nota.setClienteDatos(usuario);
+        nota.setFechaIngresoNota(LocalDateTime.now());
+        notasService.guardarNotas(nota);
+
+        return "redirect:/Cliente/misNotas";
+    }
+
+    @GetMapping("/eliminarNota/{id}")
+    public String eliminarNota(@PathVariable Long id) {
+
+            notasService.eliminarNota(id);
+
+        return "redirect:/Cliente/misNotas";
+    }
+
+
+
+
 
 
 }
